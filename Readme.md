@@ -5,12 +5,10 @@ Swiss Institute of Bioinformatics*
 
 My collection of project templates for [cookiecutter][1].
 
-(links)
-
 ## Usage
 
 Install the latest version of cookiecutter,
-preferably from [anaconda cloud service][2](but for that you will need `conda` installed).
+preferably from [anaconda cloud service][2] (but for that you will need `conda` installed).
 ```bash
 conda install -c conda-forge cookiecutter
 ```
