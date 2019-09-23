@@ -19,7 +19,11 @@ cd;
 git clone https://github.com/AngryMaciek/cookiecutters.git;
 ```
 
-(create a template)
+From now on you can create new projects from templates as:
+```bash
+cd {directory_for_the_new_project}
+cookiecutter $HOME/cookiecutters/{template_directory}
+```
 
 ## License
 
