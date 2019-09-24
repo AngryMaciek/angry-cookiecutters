@@ -18,7 +18,7 @@ src_dir: "scripts"
 output_dir: "output_dir"
 
 # file names for the random samples
-LSM_windows_files:
+samples_filenames:
   - "sample1"
   - "sample2"
   - "sample3"
