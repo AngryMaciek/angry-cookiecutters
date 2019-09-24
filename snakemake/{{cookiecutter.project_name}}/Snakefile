@@ -1,0 +1,85 @@
+##############################################################################
+#
+#   [TITLE, DESCRIPTION]
+#
+#   AUTHOR: Maciej_Bak
+#   AFFILIATION: Swiss_Institute_of_Bioinformatics
+#   CONTACT: wsciekly.maciek@gmail.com
+#   CREATED: 23-09-2019
+#   LICENSE: GPL
+#   USAGE: ...
+#
+##############################################################################
+
+# imports
+import sys
+import os
+
+localrules: all
+
+##############################################################################
+### Target rule with final output of the pipeline
+##############################################################################
+
+rule all:
+    input:
+        TXT_result_files = expand("{output_dir}/{file}", \
+            output_dir=config["output_dir"], \
+            file=config["filenames"])
+
+##############################################################################
+### Create directories for the result
+##############################################################################
+
+rule LSM_create_LSM_output_dir:
+    output:
+        tpm_output = temp("{LSM_output_dir}/dir_created_model"), #time stamp
+    params:
+        sites = lambda wildcards: [os.path.join(wildcards.LSM_output_dir,x) for x in config["LSM_windows_files"].keys()],
+        results_dir = "{LSM_output_dir}",
+        cluster_log = "{LSM_output_dir}/cluster_log",
+    log:
+        local_log = "{LSM_output_dir}/local_log",
+    shell:
+        """
+        mkdir -p {params.results_dir}; \
+        mkdir -p {params.sites}; \
+        mkdir -p {params.cluster_log}; \
+        mkdir -p {log.local_log}; \
+        touch {output.tpm_output}
+        """
+
+##############################################################################
+### Randomize the inclusion table
+##############################################################################
+
+rule LSM_shuffle_inclusion_table:
+    input:
+        tpm_output = "{LSM_output_dir}/dir_created_model",
+        inclusion_table= config["LSM_inclusion_table"],
+        SCRIPT = \
+          os.path.join(config["LSM_scripts_directory"],
+                       "mb-randomize-matrix.py")
+    output:
+        inclusion_table_out = "{LSM_output_dir}/inclusion_table_randomized.tsv"
+    params:
+        cluster_log = "{LSM_output_dir}/cluster_log/shuffle_inclusion_table.log",
+        queue = "30min",
+        time = "0:05:00"
+    log:
+        local_log = "{LSM_output_dir}/local_log/shuffle_inclusion_table.log",
+    resources:
+        threads = 1,
+        mem = 5000
+    benchmark:
+        "{LSM_output_dir}/cluster_log/shuffle_inclusion_table_benchmark.log"
+    conda:
+        "../packages.yaml"
+        #"yaml_files/LSM_envs.yaml"
+    shell:
+        """
+        python {input.SCRIPT} \
+        --in {input.inclusion_table} \
+        --out {output.inclusion_table_out} \
+        &> {log.local_log};
+        """
