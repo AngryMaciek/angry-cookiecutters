@@ -1,6 +1,6 @@
 ###############################################################################
 #
-#   [TITLE, DESCRIPTION]
+#   Config file for this Snakemake pipeline.
 #
 #   AUTHOR: Maciej_Bak
 #   AFFILIATION: Swiss_Institute_of_Bioinformatics
@@ -11,21 +11,18 @@
 ###############################################################################
 ---
 
-LSM_scripts_directory: "/scicore/home/zavolan/bakma/MAPP_dev/NEW_SPLICING_MODEL/scripts"
-LSM_output: "/scicore/home/zavolan/bakma/MAPP_dev/NEW_SPLICING_MODEL/output_dir"
-LSM_inclusion_table: "/scicore/home/zavolan/bakma/MAPP_dev/PREPARE_FOR_MODEL/output_dir/FINAL_PFM_TABLE.tsv"
-LSM_design_file: "/scicore/home/zavolan/GROUP/MAPP/DATA/HNRNPC_KD_sample/design_table.tsv"
-LSM_windows_files:
-  "3ss":
-    - "/scicore/home/zavolan/bakma/MAPP_dev/PREPARE_FOR_MODEL/output_dir/3ss/u100to50.d0to0/matrix.tsv"
-    - "/scicore/home/zavolan/bakma/MAPP_dev/PREPARE_FOR_MODEL/output_dir/3ss/u75to25.d0to0/matrix.tsv"
-  "5ss":
-    - "/scicore/home/zavolan/bakma/MAPP_dev/PREPARE_FOR_MODEL/output_dir/5ss/u50to0.d0to0/matrix.tsv"
-    - "/scicore/home/zavolan/bakma/MAPP_dev/PREPARE_FOR_MODEL/output_dir/5ss/u25to0.d0to25/matrix.tsv"
-LSM_nr_selected_motifs: "10"
-LSM_min_kmer_abundance: 0.0
-LSM_Zscore_scenario: "unpaired" # unpaired vs paired
-LSM_treat_minus_ctrl: "TRUE"
+# path to the directory with all the scripts and executable files
+src_dir: "scripts"
 
+# path for the result directory
+output_dir: "output_dir"
+
+# file names for the random samples
+LSM_windows_files:
+  - "sample1"
+  - "sample2"
+  - "sample3"
+  - "sample4"
+  - "sample5"
 
 ...
