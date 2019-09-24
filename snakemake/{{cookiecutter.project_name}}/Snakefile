@@ -1,13 +1,13 @@
 ##############################################################################
 #
-#   [TITLE, DESCRIPTION]
+#   Snakemake pipeline:
+#   {{cookiecutter.project_name}}
 #
 #   AUTHOR: Maciej_Bak
 #   AFFILIATION: Swiss_Institute_of_Bioinformatics
 #   CONTACT: wsciekly.maciek@gmail.com
 #   CREATED: 23-09-2019
 #   LICENSE: GPL
-#   USAGE: ...
 #
 ##############################################################################
 
@@ -24,9 +24,7 @@ localrules: all
 
 rule all:
     input:
-        TXT_result_files = expand("{output_dir}/{file}", \
-            output_dir=config["output_dir"], \
-            file=config["filenames"])
+
 
 ##############################################################################
 ### Create directories for the result
@@ -34,33 +32,32 @@ rule all:
 
 rule create_output_dir:
     output:
-        tpm_output = temp("{output_dir}/dir_created")
+        TMP_output = temp("{output_dir}/dir_created")
     params:
-        results_dir = "{output_dir}",
-        cluster_log = "{output_dir}/cluster_log",
+        DIR_results_dir = "{output_dir}",
+        DIR_cluster_log = "{output_dir}/cluster_log",
     log:
-        local_log = "{output_dir}/local_log",
+        DIR_local_log = "{output_dir}/local_log",
     shell:
         """
-        mkdir -p {params.results_dir}; \
-        mkdir -p {params.cluster_log}; \
-        mkdir -p {log.local_log}; \
-        touch {output.tpm_output}
+        mkdir -p {params.DIR_results_dir}; \
+        mkdir -p {params.DIR_cluster_log}; \
+        mkdir -p {log.DIR_local_log}; \
+        touch {output.TMP_output}
         """
 
 ##############################################################################
-### Randomize the inclusion table
+### Sample some random data
 ##############################################################################
 
 rule generate_files:
     input:
-        tpm_output = "{output_dir}/dir_created_model",
-        inclusion_table= config["LSM_inclusion_table"],
+        TMP_output = "{output_dir}/dir_created",
         SCRIPT = \
           os.path.join(config["LSM_scripts_directory"],
                        "mb-randomize-matrix.py")
     output:
-        inclusion_table_out = "{output_dir}/inclusion_table_randomized.tsv"
+        TXT_random_sample = "{output_dir}/inclusion_table_randomized.tsv"
     params:
         cluster_log = "{output_dir}/cluster_log/shuffle_inclusion_table.log",
         queue = "30min",
@@ -90,9 +87,9 @@ rule generate_files:
 
 rule merge_results:
     input:
-        AS_results_per_site = os.path.join("{LSM_output_dir}",
-                                            "{site}",
-                                            "AS_results_SELECTED.tsv"),
+        TXT_result_files = expand("{output_dir}/{file}",
+            output_dir=config["output_dir"],
+            file=config["filenames"])
     output:
         results_updated = "{LSM_output_dir}/{site}/AS_results_updated.tsv"
     params:
