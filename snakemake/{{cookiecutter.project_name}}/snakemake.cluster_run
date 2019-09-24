@@ -2,7 +2,6 @@
 
 snakemake \
 --use-conda \
---conda-prefix virtual_envs \
 --jobscript jobscript.sh \
 --configfile config.yaml \
 -p \
