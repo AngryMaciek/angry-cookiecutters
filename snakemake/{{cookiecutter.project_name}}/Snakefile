@@ -15,6 +15,7 @@
 import sys
 import os
 
+# local rules
 localrules: all
 
 ##############################################################################
@@ -31,19 +32,17 @@ rule all:
 ### Create directories for the result
 ##############################################################################
 
-rule LSM_create_LSM_output_dir:
+rule create_output_dir:
     output:
-        tpm_output = temp("{LSM_output_dir}/dir_created_model"), #time stamp
+        tpm_output = temp("{output_dir}/dir_created")
     params:
-        sites = lambda wildcards: [os.path.join(wildcards.LSM_output_dir,x) for x in config["LSM_windows_files"].keys()],
-        results_dir = "{LSM_output_dir}",
-        cluster_log = "{LSM_output_dir}/cluster_log",
+        results_dir = "{output_dir}",
+        cluster_log = "{output_dir}/cluster_log",
     log:
-        local_log = "{LSM_output_dir}/local_log",
+        local_log = "{output_dir}/local_log",
     shell:
         """
         mkdir -p {params.results_dir}; \
-        mkdir -p {params.sites}; \
         mkdir -p {params.cluster_log}; \
         mkdir -p {log.local_log}; \
         touch {output.tpm_output}
@@ -53,26 +52,26 @@ rule LSM_create_LSM_output_dir:
 ### Randomize the inclusion table
 ##############################################################################
 
-rule LSM_shuffle_inclusion_table:
+rule generate_files:
     input:
-        tpm_output = "{LSM_output_dir}/dir_created_model",
+        tpm_output = "{output_dir}/dir_created_model",
         inclusion_table= config["LSM_inclusion_table"],
         SCRIPT = \
           os.path.join(config["LSM_scripts_directory"],
                        "mb-randomize-matrix.py")
     output:
-        inclusion_table_out = "{LSM_output_dir}/inclusion_table_randomized.tsv"
+        inclusion_table_out = "{output_dir}/inclusion_table_randomized.tsv"
     params:
-        cluster_log = "{LSM_output_dir}/cluster_log/shuffle_inclusion_table.log",
+        cluster_log = "{output_dir}/cluster_log/shuffle_inclusion_table.log",
         queue = "30min",
         time = "0:05:00"
     log:
-        local_log = "{LSM_output_dir}/local_log/shuffle_inclusion_table.log",
+        local_log = "{output_dir}/local_log/shuffle_inclusion_table.log",
     resources:
         threads = 1,
         mem = 5000
     benchmark:
-        "{LSM_output_dir}/cluster_log/shuffle_inclusion_table_benchmark.log"
+        "{output_dir}/cluster_log/shuffle_inclusion_table_benchmark.log"
     conda:
         "../packages.yaml"
         #"yaml_files/LSM_envs.yaml"
@@ -83,3 +82,39 @@ rule LSM_shuffle_inclusion_table:
         --out {output.inclusion_table_out} \
         &> {log.local_log};
         """
+
+################################################################################
+# Update results from the model run with
+# statistical significance info
+################################################################################
+
+rule merge_results:
+    input:
+        AS_results_per_site = os.path.join("{LSM_output_dir}",
+                                            "{site}",
+                                            "AS_results_SELECTED.tsv"),
+    output:
+        results_updated = "{LSM_output_dir}/{site}/AS_results_updated.tsv"
+    params:
+        run1_results = "{LSM_output_dir}/{site}/AS_results.tsv",
+        cluster_log = os.path.join("{LSM_output_dir}","cluster_log/LSM_update_results_{site}.log"),
+        queue = "30min",
+        time = "00:05:00"
+    resources:
+        threads = 1,
+        mem = 5000
+    log:
+        local_log = os.path.join("{LSM_output_dir}","local_log","LSM_update_results_{site}.log")
+    run:
+        with open(input.AS_results_per_site) as infile:
+            significant_motifs_in_regions = [line.split("\t") for line in infile.read().splitlines()[1:]]
+            significant_motifs_in_regions = [i[0] for i in significant_motifs_in_regions]
+        with open(params.run1_results) as infile, open(output.results_updated,"w") as outfile:
+            in_lines = infile.read().splitlines()
+            outfile.write(in_lines[0]+"\ttopN_stat_sig\n") #header line
+            for line in in_lines[1:]:
+                motif_region = line.split("\t")[0]
+                if motif_region in significant_motifs_in_regions:
+                    outfile.write(line+"\tYES\n")
+                else:
+                    outfile.write(line+"\tNO\n")
