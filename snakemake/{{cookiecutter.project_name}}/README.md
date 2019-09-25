@@ -1,46 +1,52 @@
-# Install Snakemake
-Snakemake is a workflow management system that helps to create and execute data processing pipelines. It requires python3 and can be most easily installed via the bioconda package of the python anaconda distribution. You're setup right after the following steps:
+# {{cookiecutter.project_name}}
+*Maciej Bak  
+Swiss Institute of Bioinformatics*
 
-## Step 1: Downloading Miniconda3 and install it
-On Linux:
+[General information about the project]
+
+## Snakemake pipeline execution
+Snakemake is a workflow management system that helps to create and execute data processing pipelines. It requires Python 3 and can be most easily installed via the bioconda package from the anaconda cloud service.
+
+### Step 1: Download and installation of Miniconda3
+Linux:
   ```bash
   wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
   bash Miniconda3-latest-Linux-x86_64.sh
   source .bashrc
   ```
 
-On MacOS X:
+macOS:
   ```bash
   wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
   bash Miniconda3-latest-MacOSX-x86_64.sh
   source .bashrc
   ```
 
-## Step 2: Install Snakemake
+### Step 2: Snakemake installation
 
-Install snakemake version which you need (see the dependencies, the latest version is likely a good choice):
+Unless a  specific snakemake version is specified explicitly it is most likely the best choice to install the latest version:
   ```bash
-  conda install -c bioconda snakemake=5.4.0
+  conda install -c bioconda snakemake
   ```
 
-If you are missing some dependancy packages (PackageNotFoundError): check their channels on anaconda cloud and add channels to this command. Conda automatically installs dependancies but you have to have all channels profived:
-  ```bash
-  conda install -c bioconda -c conda-forge snakemake=5.4.0
-  ```
+In case you are missing some dependancy packages please install them first (with `conda install ...` as well).
 
-# Run the Pipeline
-Adjust the yaml_files/config.yaml to your needs. That is, provide all needed information (input/output).
+### Step 3: Pipeline execution
+Specify all the required information (input/output/parameters) in the config.yaml 
 
 Write a DAG (directed acyclic graph) into dag.pdf:
   ```bash
   bash snakemake.dag_run
   ```
-If you are happy with what will be done, run the pipeline locally:
+If you are happy with the execution plan, run the pipeline locally:
   ```bash
   bash snakemake.local_run
   ```
-or on a cluster environment (if required, adapt the 'slurm_cluster.json' and 'jobscript.sh' files before starting the run):
+or on a cluster environment (it might be required to adapt the 'cluster_config.json' and 'jobscript.sh' files before starting the run):
   ```bash
-  bash snakemake.local_run
+  bash snakemake.cluster_run
   ```
 
+## License
+
+GPL
