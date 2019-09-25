@@ -12,17 +12,17 @@
 ---
 
 # path to the directory with all the scripts and executable files
-src_dir: "scripts"
+src_dir: "src"
 
 # path for the result directory
 output_dir: "output_dir"
 
 # file names for the random samples
 samples_filenames:
-  - "sample1.txt"
-  - "sample2.txt"
-  - "sample3.txt"
-  - "sample4.txt"
-  - "sample5.txt"
+  - "sample1"
+  - "sample2"
+  - "sample3"
+  - "sample4"
+  - "sample5"
 
 ...

@@ -1,13 +1,14 @@
 ##############################################################################
 #
-#   [TITLE, DESCRIPTION]
+#   A small script that samples one number from a standard
+#   Gaussian distribution
 #
 #   AUTHOR: Maciej_Bak
 #   AFFILIATION: Swiss_Institute_of_Bioinformatics
 #   CONTACT: wsciekly.maciek@gmail.com
 #   CREATED: 25-09-2019
 #   LICENSE: GPL
-#   USAGE: ...
+#   USAGE: python mb_random_sample.py --outfile [outfile]
 #
 ##############################################################################
 
@@ -17,6 +18,7 @@ import os
 import time
 import logging
 from argparse import ArgumentParser, RawTextHelpFormatter
+import numpy as np
 
 def parse_arguments():
     '''Parser of the command-line arguments.'''
@@ -33,18 +35,19 @@ def parse_arguments():
                         "--logfile",
                         dest="logfile",
                         help="Store log to this file.")
-    parser.add_argument("--message",
-                        dest="message",
+    parser.add_argument("--outfile",
+                        dest="outfile",
                         required=True,
-                        help="Text to be printed to the standard output.")
+                        help="Path for the output file.")
     return parser
 
 ##############################################################################
 
 def main():
     '''Main body of the script.'''
-
-    print(options.message)
+    with open(options.outfile,"w") as f:
+        sample = np.random.normal() # by default: mu=0, sigma=1
+        f.write(str(sample))
 
 ##############################################################################
 
