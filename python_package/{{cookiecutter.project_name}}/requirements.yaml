@@ -1,0 +1,20 @@
+###############################################################################
+#
+#   Requirements of the package.
+#
+#   AUTHOR: {{cookiecutter.author}}
+#   AFFILIATION: {{cookiecutter.affiliation}}
+#   CONTACT: {{cookiecutter.contact}}
+#   CREATED: {{cookiecutter.date_created}}
+#   LICENSE: {{cookiecutter.license}}
+#
+###############################################################################
+---
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.7.3
+
+...
