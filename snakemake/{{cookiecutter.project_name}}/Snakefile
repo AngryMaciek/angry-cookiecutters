@@ -36,6 +36,7 @@ rule create_output_dir:
     output:
         TMP_output = temp(os.path.join("{output_dir}", "dir_created"))
     params:
+        DIR_random_samples = os.path.join("{output_dir}", "random_samples"),
         DIR_results_dir = "{output_dir}",
         DIR_cluster_log = os.path.join("{output_dir}", "cluster_log"),
     log:
@@ -43,6 +44,7 @@ rule create_output_dir:
     shell:
         """
         mkdir -p {params.DIR_results_dir}; \
+        mkdir -p {params.DIR_random_samples}; \
         mkdir -p {params.DIR_cluster_log}; \
         mkdir -p {log.DIR_local_log}; \
         touch {output.TMP_output}
