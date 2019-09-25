@@ -3,11 +3,11 @@
 #   A small script that samples one number from a standard
 #   Gaussian distribution
 #
-#   AUTHOR: Maciej_Bak
-#   AFFILIATION: Swiss_Institute_of_Bioinformatics
-#   CONTACT: wsciekly.maciek@gmail.com
-#   CREATED: 25-09-2019
-#   LICENSE: GPL
+#   AUTHOR: {{cookiecutter.author}}
+#   AFFILIATION: {{cookiecutter.affiliation}}
+#   CONTACT: {{cookiecutter.contact}}
+#   CREATED: {{cookiecutter.date_created}}
+#   LICENSE: {{cookiecutter.license}}
 #   USAGE: python mb_random_sample.py --outfile [outfile]
 #
 ##############################################################################

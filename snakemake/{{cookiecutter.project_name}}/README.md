@@ -1,6 +1,6 @@
 # {{cookiecutter.project_name}}
-*Maciej Bak  
-Swiss Institute of Bioinformatics*
+*{{cookiecutter.author}}  
+{{cookiecutter.affiliation}}*
 
 [General information about the project]
 
@@ -49,4 +49,4 @@ or on a cluster environment (it might be required to adapt the 'cluster_config.j
 
 ## License
 
-GPL
+{{cookiecutter.license}}
