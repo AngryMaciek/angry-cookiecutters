@@ -16,7 +16,7 @@ import sys
 import os
 
 # local rules
-localrules: all
+localrules: create_output_dir, all
 
 ##############################################################################
 ### Target rule with final output of the pipeline
@@ -24,7 +24,9 @@ localrules: all
 
 rule all:
     input:
-
+        TXT_final_results = \
+            expand(os.path.join("{output_dir}", "results.txt"),
+                output_dir=config["output_dir"])
 
 ##############################################################################
 ### Create directories for the result
@@ -32,12 +34,12 @@ rule all:
 
 rule create_output_dir:
     output:
-        TMP_output = temp("{output_dir}/dir_created")
+        TMP_output = temp(os.path.join("{output_dir}", "dir_created"))
     params:
         DIR_results_dir = "{output_dir}",
-        DIR_cluster_log = "{output_dir}/cluster_log",
+        DIR_cluster_log = os.path.join("{output_dir}", "cluster_log"),
     log:
-        DIR_local_log = "{output_dir}/local_log",
+        DIR_local_log = os.path.join("{output_dir}", "local_log"),
     shell:
         """
         mkdir -p {params.DIR_results_dir}; \
@@ -52,66 +54,64 @@ rule create_output_dir:
 
 rule generate_files:
     input:
-        TMP_output = "{output_dir}/dir_created",
+        TMP_output = os.path.join("{output_dir}", "dir_created"),
         SCRIPT = \
-          os.path.join(config["LSM_scripts_directory"],
-                       "mb-randomize-matrix.py")
+            os.path.join(config["src_dir"], "mb_random_sample.py")
     output:
-        TXT_random_sample = "{output_dir}/inclusion_table_randomized.tsv"
+        TXT_random_sample = \
+            os.path.join("{output_dir}", "random_samples", "{file}")
     params:
-        cluster_log = "{output_dir}/cluster_log/shuffle_inclusion_table.log",
+        LOG_cluster_log = \
+            os.path.join("{output_dir}", "cluster_log", "generate_files.log"),
         queue = "30min",
         time = "0:05:00"
     log:
-        local_log = "{output_dir}/local_log/shuffle_inclusion_table.log",
+        LOG_local_log = \
+            os.path.join("{output_dir}", "local_log", "generate_files.log")
     resources:
         threads = 1,
         mem = 5000
     benchmark:
-        "{output_dir}/cluster_log/shuffle_inclusion_table_benchmark.log"
+        os.path.join("{output_dir}",
+            "cluster_log", "generate_files_benchmark.log")
     conda:
-        "../packages.yaml"
-        #"yaml_files/LSM_envs.yaml"
+        "packages.yaml"
     shell:
         """
         python {input.SCRIPT} \
-        --in {input.inclusion_table} \
-        --out {output.inclusion_table_out} \
-        &> {log.local_log};
+        --outfile {output.TXT_random_sample} \
+        &> {log.LOG_local_log};
         """
 
-################################################################################
-# Update results from the model run with
-# statistical significance info
-################################################################################
+##############################################################################
+### Merge the results
+##############################################################################
 
 rule merge_results:
     input:
-        TXT_result_files = expand("{output_dir}/{file}",
-            output_dir=config["output_dir"],
-            file=config["filenames"])
+        TXT_result_files = \
+            lambda wildcards: [os.path.join(wildcards.output_dir,
+                "random_samples", f) for f in config["samples_filenames"]]
     output:
-        results_updated = "{LSM_output_dir}/{site}/AS_results_updated.tsv"
+        TXT_final_results = os.path.join("{output_dir}", "results.txt")
     params:
-        run1_results = "{LSM_output_dir}/{site}/AS_results.tsv",
-        cluster_log = os.path.join("{LSM_output_dir}","cluster_log/LSM_update_results_{site}.log"),
+        LOG_cluster_log = \
+            os.path.join("{output_dir}", "cluster_log/merge_results.log"),
         queue = "30min",
         time = "00:05:00"
     resources:
         threads = 1,
         mem = 5000
     log:
-        local_log = os.path.join("{LSM_output_dir}","local_log","LSM_update_results_{site}.log")
+        LOG_local_log = \
+            os.path.join("{output_dir}", "local_log", "merge_results.log")
     run:
-        with open(input.AS_results_per_site) as infile:
-            significant_motifs_in_regions = [line.split("\t") for line in infile.read().splitlines()[1:]]
-            significant_motifs_in_regions = [i[0] for i in significant_motifs_in_regions]
-        with open(params.run1_results) as infile, open(output.results_updated,"w") as outfile:
-            in_lines = infile.read().splitlines()
-            outfile.write(in_lines[0]+"\ttopN_stat_sig\n") #header line
-            for line in in_lines[1:]:
-                motif_region = line.split("\t")[0]
-                if motif_region in significant_motifs_in_regions:
-                    outfile.write(line+"\tYES\n")
-                else:
-                    outfile.write(line+"\tNO\n")
+        # read all the sampled numbers:
+        numbers = []
+        for i in input.TXT_result_files:
+            with open(i) as f:
+                numbers.append(f.read().splitlines()[0])
+        # save into one file:
+        with open(output.TXT_final_results, "w") as outfile:
+                outfile.write("\n".join(numbers))
+
