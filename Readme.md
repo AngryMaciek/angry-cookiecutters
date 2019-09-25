@@ -28,7 +28,7 @@ cookiecutter $HOME/cookiecutters/{template_directory}
 Alternatively, you can create the templates directly from GitHub:
 ```bash
 cd {directory_for_the_new_project}
-cookiecutter https://github.com/AngryMaciek/cookiecutters{template_directory}
+cookiecutter https://github.com/AngryMaciek/cookiecutters/{template_directory}
 ```
 
 ## License
