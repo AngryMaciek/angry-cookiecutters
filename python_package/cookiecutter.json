@@ -1,0 +1,10 @@
+{
+    "project_name": "python_package",
+    "package_name": "pkg",
+    "module_name": "module",
+    "author": "Maciej_Bak",
+    "affiliation": "Swiss_Institute_of_Bioinformatics",
+    "contact": "maciej.bak@unibas.ch",
+    "date_created": "XX-XX-XXXX",
+    "license": "GPL"
+}
