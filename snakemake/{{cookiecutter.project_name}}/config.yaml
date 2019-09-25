@@ -19,10 +19,10 @@ output_dir: "output_dir"
 
 # file names for the random samples
 samples_filenames:
-  - "sample1"
-  - "sample2"
-  - "sample3"
-  - "sample4"
-  - "sample5"
+  - "sample1.txt"
+  - "sample2.txt"
+  - "sample3.txt"
+  - "sample4.txt"
+  - "sample5.txt"
 
 ...
