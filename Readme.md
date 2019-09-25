@@ -8,7 +8,7 @@ My collection of project templates for [cookiecutter][1].
 ## Usage
 
 Install the latest version of cookiecutter,
-preferably from [anaconda cloud service][2] (but for that you will need `conda` installed).
+preferably from [anaconda cloud service][2] (but for that you will need `conda` installed - see the last section of this document).
 ```bash
 conda install -c conda-forge cookiecutter
 ```
@@ -34,6 +34,25 @@ cookiecutter https://github.com/AngryMaciek/{template_directory}
 ## License
 
 GNU General Public License
+
+## Appendix: Download, Install and Load Miniconda3
+
+On Linux:
+  ```bash
+  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  bash Miniconda3-latest-Linux-x86_64.sh
+  source .bashrc
+  ```
+
+On macOS:
+  ```bash
+  wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+  bash Miniconda3-latest-MacOSX-x86_64.sh
+  source .bashrc
+  ```
+
+
+
 
 [1]: https://cookiecutter.readthedocs.io/en/latest/
 [2]: https://anaconda.org/
