@@ -4,12 +4,11 @@
 
 [General information about the package]
 
-## Setup
+## Installation
 
-Clone this repository (under your $HOME directory):
+This package might installed directy from GitHub with `pip`:
 ```bash
-cd;
-git clone https://github.com/AngryMaciek/gumm.git;
+pip install git+https://github.com/AngryMaciek/{{cookiecutter.package_name}}.git;
 ```
 
 ## Usage
