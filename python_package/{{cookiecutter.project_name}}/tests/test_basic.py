@@ -23,11 +23,12 @@ import {{cookiecutter.package_name}}
 
 def test_simple_load():
 	"""Tests if the package is functional."""
-	result = {{cookiecutter.module_name}}.f(True)
+	result =  \
+	    {{cookiecutter.package_name}}.{{cookiecutter.module_name}}.f(True)
 	assert result
 
 def test_exception():
 	"""Tests if the exception is raised correctly."""
-	with pytest.raises({{cookiecutter.module_name}}.\
+	with pytest.raises({{cookiecutter.package_name}}.\
 		exceptions.SomethingWentWrong):
 			result = {{cookiecutter.module_name}}.f(False)
