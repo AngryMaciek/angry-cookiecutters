@@ -31,4 +31,5 @@ def test_exception():
 	"""Tests if the exception is raised correctly."""
 	with pytest.raises({{cookiecutter.package_name}}.\
 		exceptions.SomethingWentWrong):
-			result = {{cookiecutter.module_name}}.f(False)
+			result = {{cookiecutter.package_name}}.\
+			    {{cookiecutter.module_name}}.f(False)
