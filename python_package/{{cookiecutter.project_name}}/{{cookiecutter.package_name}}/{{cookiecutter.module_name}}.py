@@ -13,7 +13,7 @@
 ##############################################################################
 
 # import the module with custom exceptions
-import exceptions
+import {{cookiecutter.package_name}}.exceptions
 
 ##############################################################################
 
@@ -22,7 +22,7 @@ def f(bool):
 	if bool:
 		return(True)
 	else:
-		raise exceptions.IncorrectInput\
+		raise {{cookiecutter.package_name}}.exceptions.SomethingWentWrong\
 			("Error message.")
 
 		
