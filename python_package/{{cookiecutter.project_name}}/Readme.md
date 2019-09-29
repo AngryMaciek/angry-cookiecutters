@@ -22,9 +22,3 @@ import {{cookiecutter.package_name}}
 ## License
 
 {{cookiecutter.license}}
-
-
-* setup build
-* setup install
-pip uninstall package name
-install?

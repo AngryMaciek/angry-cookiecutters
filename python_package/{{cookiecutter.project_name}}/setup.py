@@ -9,7 +9,7 @@
 #   CONTACT: {{cookiecutter.contact}}
 #   CREATED: {{cookiecutter.date_created}}
 #   LICENSE: {{cookiecutter.license}}
-#   USAGE: ...
+#   USAGE: python setup.py install --user
 #
 ##############################################################################
 
