@@ -32,8 +32,9 @@ import {{cookiecutter.package_name}}
 This package has been tested with `pytest` package.
 In order to run these tests again activate the virtual environment and run pytest:
 ```bash
+cd $HOME/{{cookiecutter.package_name}};
 conda activate $HOME/{{cookiecutter.package_name}}/ENV;
-pytest $HOME/{{cookiecutter.package_name}}/tests/test_basic.py
+pytest;
 ```
 
 ### Global installation
