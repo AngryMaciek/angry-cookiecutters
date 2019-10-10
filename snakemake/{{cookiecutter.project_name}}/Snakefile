@@ -77,7 +77,7 @@ rule generate_files:
         mem = 5000
     benchmark:
         os.path.join("{output_dir}",
-            "cluster_log", "generate_files", "{file}_benchmark.log")
+            "cluster_log", "generate_files_{file}_benchmark.log")
     conda:
         "packages.yaml"
     singularity:
