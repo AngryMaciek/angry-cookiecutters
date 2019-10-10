@@ -65,13 +65,13 @@ rule generate_files:
     params:
         LOG_cluster_log = \
             os.path.join("{output_dir}", "cluster_log", \
-                "generate_files_{file}", ".log"),
+                "generate_files_{file}.log"),
         queue = "30min",
         time = "0:05:00"
     log:
         LOG_local_log = \
             os.path.join("{output_dir}", "local_log", \
-                "generate_files_{file}", ".log"),
+                "generate_files_{file}.log"),
     resources:
         threads = 1,
         mem = 5000
