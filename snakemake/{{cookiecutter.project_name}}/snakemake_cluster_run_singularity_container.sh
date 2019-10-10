@@ -1,11 +1,11 @@
 # Run the pipeline on a computational cluster
 
 snakemake \
---use-conda \
---jobscript jobscript.sh \
+--use-singularity \
+--jobscript jobscript_singularity_container.sh \
 --configfile config.yaml \
 -p \
---cores 100 \
+--cores 10 \
 --local-cores 2 \
 --cluster-config cluster_config.json \
 --cluster \

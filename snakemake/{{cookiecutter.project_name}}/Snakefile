@@ -80,6 +80,8 @@ rule generate_files:
             "cluster_log", "generate_files", "{file}_benchmark.log")
     conda:
         "packages.yaml"
+    singularity:
+        ""
     shell:
         """
         python {input.SCRIPT} \
