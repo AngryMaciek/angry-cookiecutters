@@ -14,7 +14,7 @@ snakemake \
 --mem={cluster.mem} \
 --qos={cluster.queue} \
 --time={cluster.time} \
---output={params.cluster_log}-%j-%N.out \
+--output={params.LOG_cluster_log}-%j-%N.out \
 -p scicore \
 --export=JOB_NAME={rule} \
 --open-mode=append"

@@ -64,18 +64,20 @@ rule generate_files:
             os.path.join("{output_dir}", "random_samples", "{file}")
     params:
         LOG_cluster_log = \
-            os.path.join("{output_dir}", "cluster_log", "generate_files.log"),
+            os.path.join("{output_dir}", "cluster_log", "generate_files", \
+                "{file}", ".log"),
         queue = "30min",
         time = "0:05:00"
     log:
         LOG_local_log = \
-            os.path.join("{output_dir}", "local_log", "generate_files.log")
+            os.path.join("{output_dir}", "local_log", "generate_files", \
+                "{file}.log"),
     resources:
         threads = 1,
         mem = 5000
     benchmark:
         os.path.join("{output_dir}",
-            "cluster_log", "generate_files_benchmark.log")
+            "cluster_log", "generate_files", "{file}_benchmark.log")
     conda:
         "packages.yaml"
     shell:
