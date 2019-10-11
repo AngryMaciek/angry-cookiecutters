@@ -1,20 +1,17 @@
 # Run the pipeline on a computational cluster
 
 snakemake \
---use-conda \
---jobscript jobscript_conda_env.sh \
 --configfile config.yaml \
--p \
+--cluster-config cluster_config.json \
+--use-conda \
 --cores 10 \
 --local-cores 2 \
---cluster-config cluster_config.json \
+-p \
 --cluster \
 "sbatch \
 --cpus-per-task={cluster.threads} \
 --mem={cluster.mem} \
 --qos={cluster.queue} \
 --time={cluster.time} \
---output={params.LOG_cluster_log}-%j-%N.out \
--p scicore \
---export=JOB_NAME={rule} \
---open-mode=append"
+--output={params.LOG_cluster_log}-%j-%N \
+-p scicore"
