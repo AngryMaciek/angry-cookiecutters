@@ -13,5 +13,5 @@ snakemake \
 --mem={cluster.mem} \
 --qos={cluster.queue} \
 --time={cluster.time} \
---output={params.LOG_cluster_log}-%j-%N \
+--output={params.LOG_cluster_log}-%j-%N.log \
 -p scicore"

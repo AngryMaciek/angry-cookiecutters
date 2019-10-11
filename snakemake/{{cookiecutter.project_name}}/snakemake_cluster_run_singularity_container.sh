@@ -13,7 +13,6 @@ snakemake \
 --mem={cluster.mem} \
 --qos={cluster.queue} \
 --time={cluster.time} \
---output={params.LOG_cluster_log}-%j-%N \
+--output={params.LOG_cluster_log}-%j-%N.log \
 -p scicore" \
---singularity-args "--no-home --bind ${PWD}" \
---jobscript jobscript_singularity_container.sh \
+--singularity-args "--no-home --bind ${PWD}"
