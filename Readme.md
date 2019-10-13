@@ -33,7 +33,7 @@ cookiecutter https://github.com/AngryMaciek/cookiecutters/{template_directory}
 
 ## License
 
-GNU General Public License
+GNU General Public License v3.0
 
 ## Appendix: Download, Install and Load Miniconda3
 
