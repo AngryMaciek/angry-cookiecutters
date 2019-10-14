@@ -14,5 +14,5 @@ snakemake \
 --qos={cluster.queue} \
 --time={cluster.time} \
 --output={params.LOG_cluster_log}-%j-%N.log \
--p scicore" \
+-p shi" \
 --singularity-args "--no-home --bind ${PWD}"
