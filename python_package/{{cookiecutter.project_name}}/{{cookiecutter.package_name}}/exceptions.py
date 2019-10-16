@@ -12,6 +12,10 @@
 #
 ##############################################################################
 
-class SomethingWentWrong(Exception):
-	"""Raised when something went wrong."""
-	pass
+class Error(Exception):
+    """Base class for other exceptions."""
+    pass
+
+class SomethingWentWrong(Error):
+    """Raised when something went wrong."""
+    pass
