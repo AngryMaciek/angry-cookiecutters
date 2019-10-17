@@ -6,15 +6,11 @@
 Welcome to {{cookiecutter.project_name}}'s documentation!
 =========================================================
 
+[General information about the package]
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Table of Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   installation
+   guide
