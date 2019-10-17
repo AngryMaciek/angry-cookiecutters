@@ -1,0 +1,9 @@
+Notes for the developer:
+
+* environment.yaml is for DEVELOPER to build an environment for developing the package
+
+* tests directory is for DEVELOPER to test the package with pytest
+
+* pytest.ini is for the DEVELOPER to set up the testing
+
+* requirements.txt is for USER to install the dependancies by pip
