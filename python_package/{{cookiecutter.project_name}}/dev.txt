@@ -6,4 +6,6 @@ Notes for the developer:
 
 * pytest.ini is for the DEVELOPER to set up the testing
 
+* meta.yaml is for the DEVELOPER as a conda build recipe
+
 * requirements.txt is for USER to install the dependancies by pip

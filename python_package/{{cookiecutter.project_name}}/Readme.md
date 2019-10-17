@@ -6,47 +6,36 @@
 
 ## Installation & Use
 
-### Virtual environment
+### Virtual environment (preferable)
 
-All the requirements are listed in environment.yaml which is also a base to create a `conda` virtual environment to install and run this package in.
+If you use [miniconda](https://docs.conda.io/en/latest/miniconda.html) (or Anaconda, for that matter) and its virtual environments the package can be installed directly from my channel at [Anaconda Cloud](https://anaconda.org/) service:
 ```bash
-# clone the repository:
+conda install -c angrymaciek {{cookiecutter.package_name}}
+```
+
+### pip installation
+
+All the requirements to be installed by `pip` are listed in requirements.txt. Clone the repository first, install the requirements and then install this package:
+```bash
 cd;
 git clone https://github.com/AngryMaciek/{{cookiecutter.package_name}}.git;
 cd {{cookiecutter.package_name}};
-# create a virtual environment and install the package within:
-conda env create --prefix ENV -f environment.yaml;
-conda activate $HOME/{{cookiecutter.package_name}}/ENV;
-pip install .
-# test the package in a python interpreter:
-python
+pip install -r requirements.txt --user;
+pip install . --user;
+```
+Provided all the requirements are satisfied for your default environment it is OK to install the package directly from GitHub:  
+```bash
+pip install git+https://github.com/AngryMaciek/{{cookiecutter.package_name}}.git --user;
+```
+
+### Use test
+
+Test if the package might be successfully loaded in a python interpreter:
+```python
 import {{cookiecutter.package_name}}
 {{cookiecutter.package_name}}.{{cookiecutter.module_name}}.f(True)
-```
-
-This package has been tested with `pytest` package.
-In order to run these tests again activate the virtual environment and run pytest:
-```bash
-cd $HOME/{{cookiecutter.package_name}};
-conda activate $HOME/{{cookiecutter.package_name}}/ENV;
-pytest;
-```
-
-### Global installation
-
-Provided all the requirements are satisfied for your default environment it is OK to install the package globally and directly from GitHub:  
-```bash
-pip install git+https://github.com/AngryMaciek/{{cookiecutter.package_name}}.git;
-```
-
-### Package removal
-
-In order to uninstall the package use `pip` (either within a virtual environment of in your default environment):
-```bash
-pip uninstall {{cookiecutter.package_name}};
 ```
 
 ## License
 
 {{cookiecutter.license}}
-
