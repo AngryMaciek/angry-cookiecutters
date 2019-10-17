@@ -1,0 +1,55 @@
+###############################################################################
+#
+#   conda-build recipe for the package
+#
+#   AUTHOR: {{cookiecutter.author}}
+#   AFFILIATION: {{cookiecutter.affiliation}}
+#   CONTACT: {{cookiecutter.contact}}
+#   CREATED: {{cookiecutter.date_created}}
+#   LICENSE: {{cookiecutter.license}}
+#
+###############################################################################
+---
+
+package:
+  name: {{cookiecutter.package_name}}
+  version: "1.0.0"
+
+source:
+  git_url: https://github.com/AngryMaciek/{{cookiecutter.package_name}}
+  git_depth: 1
+
+build:
+  # limit to macOS an Linux:
+  skip: True  # [win]
+
+  number: 0
+  script: >
+    pip install
+    git+https://github.com/AngryMaciek/{{cookiecutter.package_name}}
+
+channels:
+  - defaults
+
+requirements:
+  build:
+    - python>=3.5.0
+    - pip>=19.2.3
+  run:
+    - python>=3.5.0
+
+test:
+  commands:
+    - python -c 'import {{cookiecutter.package_name}}'
+
+about:
+  home: https://github.com/AngryMaciek/{{cookiecutter.package_name}}
+  summary: ""
+  license: {{cookiecutter.license}}
+  license_file: LICENSE
+
+extra:
+  maintainers:
+   - {{cookiecutter.author}}
+
+...
