@@ -4,7 +4,7 @@
 
 [General information about the package]
 
-All information available in the docs [link]  
+Whole documentation is available at Read The Docs: [link to readthedocs]  
 
 This software is licensed under {{cookiecutter.license}}.
 
