@@ -1,5 +1,5 @@
-.. {{cookiecutter.project_name}} documentation master file, created by
-   sphinx-quickstart on Sun Oct 13 00:57:02 2019.
+.. {{cookiecutter.project_name}} documentation master file,
+   created by sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 

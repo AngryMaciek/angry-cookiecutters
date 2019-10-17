@@ -9,3 +9,7 @@ Notes for the developer:
 * meta.yaml is for the DEVELOPER as a conda build recipe
 
 * requirements.txt is for USER to install the dependancies by pip
+
+* DEVELOPER: to build the docs with sphinx u need:
+https://anaconda.org/anaconda/sphinx_rtd_theme
+
