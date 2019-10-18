@@ -18,7 +18,7 @@ import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
-project = '{{cookiecutter.project_name}}'
+project = '{{cookiecutter.package_name}}'
 copyright = 'XXXX, {{cookiecutter.author}}'
 author = '{{cookiecutter.author}}'
 
