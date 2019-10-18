@@ -12,6 +12,7 @@ Welcome to {{cookiecutter.project_name}}'s documentation!
    :maxdepth: 2
    :caption: Table of Contents:
 
+   introduction
    installation
    guide
    changelog
