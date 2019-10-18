@@ -29,4 +29,4 @@ docs:
 	@echo "Built documentation under: docs/_build/html/index.html"
 
 env:
-	conda env create --prefix $(V_ENV) -f environment.yaml
+	conda env create --prefix $(V_ENV) -f dev_environment.yaml
