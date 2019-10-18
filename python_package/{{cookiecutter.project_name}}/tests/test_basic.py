@@ -17,7 +17,7 @@
 import pytest
 
 # import the package
-import {{cookiecutter.package_name}}
+from context import {{cookiecutter.package_name}}
 
 ##############################################################################
 
