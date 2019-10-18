@@ -18,6 +18,7 @@ from setuptools import setup
 setup(name="{{cookiecutter.package_name}}",
 	version="0.0.0.9000",
 	description="",
+    long_description=open('Readme.md').read(),
 	url="",
 	author="{{cookiecutter.author}}",
 	author_email="{{cookiecutter.contact}}",
