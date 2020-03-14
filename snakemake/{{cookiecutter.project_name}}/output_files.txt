@@ -1,0 +1,6 @@
+output_dir/results.txt
+output_dir/random_samples/sample3
+output_dir/random_samples/sample5
+output_dir/random_samples/sample2
+output_dir/random_samples/sample1
+output_dir/random_samples/sample4
