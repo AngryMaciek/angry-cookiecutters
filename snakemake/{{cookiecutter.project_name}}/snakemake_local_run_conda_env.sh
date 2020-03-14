@@ -1,7 +1,26 @@
 # Run the pipeline on a local machine
 
+cleanup () {
+  rc=$?
+  rm -rf .snakemake/
+  rm -rf output_dir/
+  cd $user_dir
+  echo "Exit status: $rc"
+}
+trap cleanup EXIT
+
+set -eo pipefail  # ensures that script exits at first command that exits with non-zero status
+set -u  # ensures that script exits when unset variables are used
+set -x  # facilitates debugging by printing out executed commands
+
+user_dir=$PWD
+pipeline_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+cd $pipeline_dir
+
 snakemake \
---use-conda \
---configfile config.yaml \
--p \
---cores 2
+  --snakefile="Snakefile" \
+  --configfile="config.yaml" \
+  --cores=2 \
+  --printshellcmds \
+  --verbose \
+  --use-conda
