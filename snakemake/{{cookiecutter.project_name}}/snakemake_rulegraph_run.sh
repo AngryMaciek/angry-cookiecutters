@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Run the pipeline on a local machine
-# with conda environments
+# Create the Rule Graph for the workflow
 
 cleanup () {
     rc=$?
@@ -23,7 +22,9 @@ cd "$pipeline_dir"
 snakemake \
     --snakefile="Snakefile" \
     --configfile="config.yml" \
-    --use-conda \
-    --cores=2 \
     --printshellcmds \
-    --verbose
+    --dryrun \
+    --verbose \
+    --rulegraph \
+    | dot -Tpdf \
+    > rulegraph.pdf

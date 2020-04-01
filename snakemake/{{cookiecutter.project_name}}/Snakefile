@@ -106,7 +106,7 @@ rule generate_files:
             "generate_files_{file}.benchmark.log")
 
     conda:
-        "packages.yaml"
+        "packages.yml"
 
     container:
         ""
