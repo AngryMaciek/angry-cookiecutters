@@ -27,7 +27,7 @@ cookiecutter $HOME/cookiecutters/{template_directory}
 
 ## License
 
-GNU General Public License v3.0
+Apache 2.0
 
 ## Appendix: Download, Install and Load Miniconda3
 

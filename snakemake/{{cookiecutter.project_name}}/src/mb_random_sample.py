@@ -7,7 +7,7 @@
 #   AFFILIATION: Swiss_Institute_of_Bioinformatics
 #   CONTACT: wsciekly.maciek@gmail.com
 #   CREATED: 01-04-2020
-#   LICENSE: GPL_v3.0
+#   LICENSE: Apache_2.0
 #   USAGE: ...
 #
 ##############################################################################
