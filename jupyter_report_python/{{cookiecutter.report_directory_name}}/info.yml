@@ -1,0 +1,4 @@
+author: "{{cookiecutter.author}}"
+affiliation: "{{cookiecutter.affiliation}}"
+contact: "{{cookiecutter.contact}}"
+date: "{{cookiecutter.date_created}}"
