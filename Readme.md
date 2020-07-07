@@ -1,4 +1,4 @@
-# Cookie cutters
+# Angry cookie cutters
 
 *Maciej Bak  
 Swiss Institute of Bioinformatics*
@@ -16,13 +16,13 @@ conda install -c conda-forge cookiecutter
 Clone this repository (under your $HOME directory):
 ```bash
 cd;
-git clone https://github.com/AngryMaciek/cookiecutters.git;
+git clone https://github.com/AngryMaciek/angry-cookiecutters.git;
 ```
 
 From now on you can create new projects from templates as:
 ```bash
 cd {directory_for_the_new_project}
-cookiecutter $HOME/cookiecutters/{template_directory}
+cookiecutter $HOME/angry-cookiecutters/{template_directory}
 ```
 
 ## License
