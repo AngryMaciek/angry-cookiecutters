@@ -1,0 +1,23 @@
+###############################################################################
+#
+#   Software to be installed in the environment
+#
+#   AUTHOR: {{cookiecutter.author}}
+#   AFFILIATION: {{cookiecutter.affiliation}}
+#   CONTACT: {{cookiecutter.contact}}
+#   CREATED: {{cookiecutter.date_created}}
+#   LICENSE: MIT
+#
+###############################################################################
+---
+
+  name: {{cookiecutter.repository_name}}-dev
+      
+  channels:
+    - bioconda
+    - conda-forge
+      
+  dependencies:
+    - python=3.7.4
+  
+...
